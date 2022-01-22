@@ -32,6 +32,7 @@ function Index() {
       })
       }
       </ul>
+     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
      <a href="#" class="mt-3 btn btn-lg btn-primary rounded-pill w-100 fw-bold text-white">
       Tuit</a>
     </div>

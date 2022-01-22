@@ -1,6 +1,7 @@
 import React from "react";
 
 export default class TuitStats extends React.Component {
+  // eslint-disable-next-line no-useless-constructor
   constructor(props) {
     super(props);
   }

@@ -8,7 +8,8 @@ const Home = () => {
         <div className="d-flex">
           <div className="p-2">
             <img className="ttr-width-50px rounded-circle"
-                 src="../images/nasa-logo.jpg"/>
+              alt= "nasa logo"
+              src="../images/nasa-logo.jpg"/>
           </div>
           <div className="p-2 w-100">
             <textarea
@@ -24,6 +25,7 @@ const Home = () => {
                 <i className="far fa-map-location me-3"></i>
               </div>
               <div className="col-2">
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a className="btn btn-primary rounded-pill fa-pull-right fw-bold ps-4 pe-4">
                   Tuit
                 </a>
