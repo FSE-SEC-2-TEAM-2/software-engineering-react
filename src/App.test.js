@@ -1,8 +1,10 @@
+import React from 'react'
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import '@testing-library/jest-dom'
 
-test('renders Whats happening link', () => {
+test('renders home screen', () => {
   render(<App />);
-  const linkElement = screen.getByText(/What's happening/i);
+  const linkElement = screen.getByText(/Home Screen/i);
   expect(linkElement).toBeInTheDocument();
 });
