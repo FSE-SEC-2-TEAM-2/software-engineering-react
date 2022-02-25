@@ -9,7 +9,7 @@ export const Tuit = ({tuit, deleteTuit}) => {
             <div className="pe-2">
                 {
                     tuit.postedBy &&
-                    <img src={`../images/react.png`}
+                    <img src={`../images/user.png`}
                          className="ttr-tuit-avatar-logo rounded-circle" alt="Avatar Logo"/>
                     // <i className={`fa fa-user text-center ttr-tuit-avatar-logo rounded-circle`}/>
                 }
