@@ -1,6 +1,6 @@
 import React from 'react';
 import {fireEvent, render, screen, click} from '@testing-library/react';
-import Navigation from "./index";
+import {Navigation} from "./index";
 import {BrowserRouter} from "react-router-dom";
 import '@testing-library/jest-dom'
 

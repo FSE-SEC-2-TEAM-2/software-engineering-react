@@ -25,12 +25,13 @@ body {
 .ttr-width-50px {
     width: 50px;
 }
+
 .ttr-width-150px {
     width: 150px;
 }
 
 .left-0 {
-    left: 0px;
+    left: 0;
 }
 
 .ttr-top-75px {

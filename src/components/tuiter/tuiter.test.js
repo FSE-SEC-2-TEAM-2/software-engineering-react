@@ -7,7 +7,7 @@ import {
     act,
     waitFor
 } from '@testing-library/react';
-import Tuiter from "./index";
+import {Tuiter} from "./index";
 import '@testing-library/jest-dom'
 
 // jest.mock("react-router-dom", () => ({

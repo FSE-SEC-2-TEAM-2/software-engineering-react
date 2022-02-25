@@ -15,13 +15,13 @@ jest.mock('axios');
 // ];
 
 test('tuit list renders static tuit array', () => {
-  // TODO: implement this
+    // TODO: implement this
 });
 
 test('tuit list renders async', async () => {
-  // TODO: implement this
+    // TODO: implement this
 })
 
 test('tuit list renders mocked', async () => {
-  // TODO: implement this
+    // TODO: implement this
 });
