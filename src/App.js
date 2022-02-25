@@ -8,6 +8,8 @@ import './styles.css';
 import {Tuiter} from "./components/tuiter";
 
 function App() {
+    console.log("Node Server: " + process.env.REACT_APP_BASE_URL)
+    console.log("Test: " + process.env.REACT_APP_TEST)
     return (
         <Tuiter/>
     );
