@@ -20,17 +20,17 @@
         width: 1225px;
     }
 
-    .ttr-tuiter,
+    .ttr-tuiter
     .ttr-left-column {
         width: 275px;
     }
 
-    .ttr-tuiter,
+    .ttr-tuiter
     .ttr-center-column {
         width: 600px;
     }
 
-    .ttr-tuiter,
+    .ttr-tuiter
     .ttr-right-column {
         width: 350px;
     }
@@ -42,17 +42,17 @@
         width: 1038px;
     }
 
-    .ttr-tuiter,
+    .ttr-tuiter
     .ttr-left-column {
         width: 88px;
     }
 
-    .ttr-tuiter,
+    .ttr-tuiter
     .ttr-center-column {
         width: 600px;
     }
 
-    .ttr-tuiter,
+    .ttr-tuiter
     .ttr-right-column {
         width: 350px;
     }
@@ -61,12 +61,12 @@
         text-align: center !important;
     }
 
-    .ttr-navigation,
+    .ttr-navigation
     .ttr-label {
         display: none;
     }
 
-    .ttr-navigation,
+    .ttr-navigation
     .ttr-tuit-button {
         width: 50px;
     }
@@ -79,17 +79,17 @@
         width: 978px;
     }
 
-    .ttr-tuiter,
+    .ttr-tuiter
     .ttr-left-column {
         width: 88px;
     }
 
-    .ttr-tuiter,
+    .ttr-tuiter
     .ttr-center-column {
         width: 600px;
     }
 
-    .ttr-tuiter,
+    .ttr-tuiter
     .ttr-right-column {
         width: 290px;
     }
@@ -98,12 +98,12 @@
         text-align: center !important;
     }
 
-    .ttr-navigation,
+    .ttr-navigation
     .ttr-label {
         display: none;
     }
 
-    .ttr-navigation,
+    .ttr-navigation
     .ttr-tuit-button {
         width: 50px;
     }
@@ -114,17 +114,17 @@
         max-width: 688px;
     }
 
-    .ttr-tuiter,
+    .ttr-tuiter
     .ttr-left-column {
         width: 88px;
     }
 
-    .ttr-tuiter,
+    .ttr-tuiter
     .ttr-center-column {
         width: 600px;
     }
 
-    .ttr-tuiter,
+    .ttr-tuiter
     .ttr-right-column {
         display: none;
     }
@@ -133,12 +133,12 @@
         text-align: center !important;
     }
 
-    .ttr-navigation,
+    .ttr-navigation
     .ttr-label {
         display: none;
     }
 
-    .ttr-navigation,
+    .ttr-navigation
     .ttr-tuit-button {
         width: 50px;
     }

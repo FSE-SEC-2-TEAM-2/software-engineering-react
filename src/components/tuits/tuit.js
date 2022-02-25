@@ -9,17 +9,17 @@ export const Tuit = ({tuit, deleteTuit}) => {
             <div className="pe-2">
                 {
                     tuit.postedBy &&
-                    <img src={`../images/${tuit.postedBy.username}.jpg`}
+                    <img src={`../images/react.png`}
                          className="ttr-tuit-avatar-logo rounded-circle" alt="Avatar Logo"/>
+                    // <i className={`fa fa-user text-center ttr-tuit-avatar-logo rounded-circle`}/>
                 }
             </div>
             <div className="w-100">
                 <i onClick={() => deleteTuit(tuit._id)} className="fas fa-remove fa-2x fa-pull-right"/>
                 <h2
                     className="fs-5">
-                    {tuit.postedBy && tuit.postedBy.username}
-                    @{tuit.postedBy && tuit.postedBy.username} -
-                    {tuit.published}</h2>
+                    {tuit.postedBy && tuit.postedBy.username} ({tuit.postedBy && tuit.postedBy.email})
+                </h2>
                 {tuit.tuit}
                 {
                     tuit.youtube &&
