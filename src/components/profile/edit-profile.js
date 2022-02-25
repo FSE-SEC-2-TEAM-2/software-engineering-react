@@ -1,3 +1,4 @@
+import React from "react";
 import {Link} from "react-router-dom";
 
 const EditProfile = () => {
@@ -5,7 +6,7 @@ const EditProfile = () => {
       <div className="ttr-edit-profile">
           <div className="border border-bottom-0">
               <Link to="/profile" className="btn btn-light rounded-pill fa-pull-left fw-bolder mt-2 mb-2 ms-2">
-                  <i className="fa fa-close"></i>
+                  <i className="fa fa-close"/>
               </Link>
               <Link to="/profile" className="btn btn-dark rounded-pill fa-pull-right fw-bolder mt-2 mb-2 me-2">
                   Save
@@ -44,7 +45,7 @@ const EditProfile = () => {
               <label htmlFor="bio">Bio</label>
               <textarea
                 className="p-0 form-control border-0"
-                id="bio"></textarea>
+                id="bio"/>
             </div>
             <div className="border border-secondary rounded-3 p-2 mb-3">
               <label htmlFor="date-of-birth">Date of birth</label>
