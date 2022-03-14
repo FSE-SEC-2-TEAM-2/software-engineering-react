@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const BASE_URL = process.env.REACT_APP_TEST;
+console.log(`Using ${BASE_URL} for Testing!`);
 
 const LOGIN_API = `${BASE_URL}/login`;
 const USERS_API = `${BASE_URL}/users`;
