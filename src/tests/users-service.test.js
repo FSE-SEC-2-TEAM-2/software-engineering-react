@@ -19,7 +19,7 @@ describe('createUser', () => {
         const newUser = await services.createUser(ripley);
 
         expect(newUser.username).toEqual(ripley.username);
-        // expect(newUser.password).toEqual(ripley.password);
+        expect(newUser.password).toEqual(ripley.password);
         expect(newUser.email).toEqual(ripley.email);
     });
 });
@@ -65,13 +65,13 @@ describe('findUserById', () => {
         const newUser = await services.createUser(adam);
 
         expect(newUser.username).toEqual(adam.username);
-        // expect(newUser.password).toEqual(adam.password);
+        expect(newUser.password).toEqual(adam.password);
         expect(newUser.email).toEqual(adam.email);
 
         const existingUser = await services.findUserById(newUser._id);
 
         expect(existingUser.username).toEqual(adam.username);
-        // expect(existingUser.password).toEqual(adam.password);
+        expect(existingUser.password).toEqual(adam.password);
         expect(existingUser.email).toEqual(adam.email);
     });
 });
@@ -84,7 +84,7 @@ describe('findAllUsers', () => {
 
     beforeAll(() =>
         usernames.map(username =>
-            createUser({
+            services.createUser({
                 username,
                 password: `${username}123`,
                 email: `${username}@stooges.com`
@@ -116,7 +116,7 @@ describe('findAllUsers', () => {
         usersWeInserted.forEach(user => {
             const username = usernames.find(username => username === user.username);
             expect(user.username).toEqual(username);
-            // expect(user.password).toEqual(`${username}123`);
+            expect(user.password).toEqual(`${username}123`);
             expect(user.email).toEqual(`${username}@stooges.com`);
         });
     });
