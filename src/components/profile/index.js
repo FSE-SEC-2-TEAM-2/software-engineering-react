@@ -1,6 +1,7 @@
 import * as service from "../../services/auth-service";
-import {useNavigate} from "react-router-dom";
+import {BrowserRouter, Routes, Route, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {MyTuits} from "./my-tuits";
 
 export const Profile = () => {
     const navigate = useNavigate();
@@ -23,6 +24,11 @@ export const Profile = () => {
             <h6>@{profile.username}</h6>
             <button onClick={logout}>
                 Logout</button>
+
+            <Routes>
+                <Route path="/"
+                       element={<MyTuits/>}/>
+            </Routes>
         </div>
     );
 };

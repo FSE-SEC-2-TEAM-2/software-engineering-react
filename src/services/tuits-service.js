@@ -15,7 +15,7 @@ export const findTuitById = (tid) =>
     api.get(`${TUITS_API}/${tid}`)
         .then(response => response.data);
 
-export const findTuitByUser = (uid) =>
+export const findTuitsByUser = (uid) =>
     api.get(`${USERS_API}/${uid}/tuits`)
         .then(response => response.data);
 
