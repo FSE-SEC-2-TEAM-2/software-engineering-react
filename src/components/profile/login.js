@@ -10,7 +10,7 @@ export const Login = () => {
     const navigate = useNavigate()
     const login = () =>
         authService.login(loginUser)
-            .then((user) => navigate('/profile/mytuits'))
+            .then((user) => navigate('/profile'))
             .catch(e => alert(e));
 
     const deleteUser = (uid) =>
