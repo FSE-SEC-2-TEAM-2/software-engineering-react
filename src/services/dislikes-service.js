@@ -13,3 +13,7 @@ export const userTogglesTuitDislikes = (uid, tid) =>
 export const doesUserDislikeTuit = async (uid, tid) =>
     api.get(`${BASE_URL}/users/${uid}/dislikes/${tid}`)
         .then(response => response.data);
+
+export const findAllTuitsDislikedByUser = (uid) =>
+    api.get(`${BASE_URL}/users/${uid}/dislikes`)
+        .then(response => response.data);
