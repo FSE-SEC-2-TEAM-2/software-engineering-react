@@ -3,6 +3,7 @@ import {Routes, Route, useNavigate, Link, useLocation, Router} from "react-route
 import React, {useEffect, useRef, useState} from "react";
 import {MyTuits} from "./my-tuits";
 import {MyLikes} from "./my-likes";
+import {MyDislikes} from "./my-dislikes";
 import * as service from "../../services/tuits-service";
 
 export const Profile = () => {
@@ -81,13 +82,19 @@ export const Profile = () => {
                 </li>
                 <li className="nav-item">
                     <Link to="/profile/likes"
-                          className={`nav-link ${location.pathname.indexOf('likes') >= 0 ? 'active':''}`}>
+                          className={`nav-link ${location.pathname.indexOf('likes') >= 0 && location.pathname.indexOf('dislikes') <= 0 ? 'active':''}`}>
                         Likes</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="/profile/dislikes"
+                          className={`nav-link ${location.pathname.indexOf('dislikes') >= 0 ? 'active':''}`}>
+                        Dislikes</Link>
                 </li>
             </ul>
             <Routes>
                 <Route path="/mytuits" element={<MyTuits ref={myTuits}/>}/>
                 <Route path="/likes" element={<MyLikes/>}/>
+                <Route path="/dislikes" element={<MyDislikes/>}/>
             </Routes>
         </div>
     );
