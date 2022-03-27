@@ -15,5 +15,5 @@ export const doesUserLikeTuit = async (uid, tid) =>
         .then(response => response.data);
 
 export const findAllTuitsLikedByUser = (uid) =>
-    axios.get(`${USERS_API}/${uid}/likes`)
+    api.get(`${BASE_URL}/users/${uid}/likes`)
         .then(response => response.data);
