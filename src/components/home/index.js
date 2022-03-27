@@ -16,14 +16,21 @@ export const Home = () => {
 
     const findTuits = async () => {
         if (hasParams === undefined) {
-            hasParams = !!uid.uid;
+            if (uid.uid) {
+                // console.log('hasParams');
+                // console.log(uid);
+                hasParams = true;
+            } else {
+                // console.log('noParams');
+                hasParams = false;
+            }
         }
 
-        if (hasParams) {
-            // console.log("Get User Tuits alone")
-            return service.findTuitsByUser(uid.uid)
-                .then(tuits => setTuits(tuits))
-        } else {
+        // if (hasParams) {
+        //     // console.log("Get User Tuits alone")
+        //     return service.findTuitsByUser(uid.uid)
+        //         .then(tuits => setTuits(tuits))
+        // } else {
             try {
                 const user = await authService.profile();
                 // console.log(user)
@@ -38,7 +45,7 @@ export const Home = () => {
             }
             return service.findAllTuits()
                 .then(tuits => setTuits(tuits))
-        }
+        // }
     }
     useEffect(() => {
         let isMounted = true;
@@ -91,7 +98,7 @@ export const Home = () => {
                     </div>
                 }
             </div>
-            <Tuits tuits={tuits} deleteTuit={deleteTuit}/>
+            <Tuits tuits={tuits} refreshTuits={findTuits}/>
         </div>
     );
 };

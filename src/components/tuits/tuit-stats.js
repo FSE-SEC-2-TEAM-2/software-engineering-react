@@ -1,30 +1,64 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
+import * as authService from "../../services/auth-service";
+import * as likeService from "../../services/likes-service";
 
-export class TuitStats extends React.Component {
-    // eslint-disable-next-line no-useless-constructor
-    constructor(props) {
-        super(props);
+export const TuitStats = ({tuit, likeTuit = () => {}}) => {
+    const [uid, setUid] = useState(null);
+    const [liked, setLiked] = useState(false);
+
+    const checkIfLoggedIn = async () => {
+        const user = await authService.profile();
+        // console.log(user)
+        const suid = {
+            uid: user._id
+        }
+        setUid(suid);
+        // console.log("Used session successfully")
+        // console.log(uid)
+        // console.log(user._id)
+        const result = await likeService.doesUserLikeTuit(user._id, tuit._id)
+        setLiked(result)
+        // console.log(result)
+        // console.log(liked)
     }
-
-    render() {
-        return (
-            <div className="row mt-2">
-                <div className="col">
-                    <i className="far fa-message me-1"/>
-                    {this.props.tuit.stats && this.props.tuit.stats.replies}
-                </div>
-                <div className="col">
-                    <i className="far fa-retweet me-1"/>
-                    {this.props.tuit.stats && this.props.tuit.stats.retuits}
-                </div>
-                <div className="col">
-                    <i className="far fa-heart me-1"/>
-                    {this.props.tuit.stats && this.props.tuit.stats.likes}
-                </div>
-                <div className="col">
-                    <i className="far fa-inbox-out"/>
-                </div>
+    useEffect(() => {
+        let isMounted = true;
+        checkIfLoggedIn()
+        return () => {
+            isMounted = false;
+        }
+    }, []);
+    return (
+        <div className="row mt-2">
+            <div className="col">
+                <i className="far fa-message me-1"/>
+                {tuit.stats && tuit.stats.replies}
             </div>
-        );
-    }
+            <div className="col">
+                <i className="far fa-retweet me-1"/>
+                {tuit.stats && tuit.stats.retuits}
+            </div>
+            <div className="col">
+          <span onClick={() => {
+              likeTuit(tuit);
+              setLiked(!liked);
+          }}>
+              {
+                  liked &&
+                  <i className="fas fa-heart me-1" style={{color: 'red'}}/>
+              }
+              {
+                  !liked &&
+                  <i className="far fa-heart me-1"/>
+              }
+              {/*<i className="fas fa-heart me-1" />*/}
+              {tuit.stats && tuit.stats.likes}
+          </span>
+            </div>
+            <div className="col">
+                <i className="far fa-inbox-out"/>
+            </div>
+        </div>
+    );
 }
