@@ -46,18 +46,18 @@ export const TuitStats = ({tuit, likeTuit = () => {}}) => {
           }}>
               {
                   liked &&
-                  <i className="fas fa-heart me-1" style={{color: 'red'}}/>
+                  <i className="fa-solid fa-thumbs-up me-1"/>
               }
               {
                   !liked &&
-                  <i className="far fa-heart me-1"/>
+                  <i className="fa-light fa-thumbs-up me-1"/>
               }
               {/*<i className="fas fa-heart me-1" />*/}
               {tuit.stats && tuit.stats.likes}
           </span>
             </div>
             <div className="col">
-                <i className="far fa-inbox-out"/>
+                <i className="fa-light fa-thumbs-down me-1"/>
             </div>
         </div>
     );
