@@ -7,6 +7,8 @@ const LOGIN_API = `${BASE_URL}/login`;
 const USERS_API = `${BASE_URL}/users`;
 const TUITS_API = `${BASE_URL}/tuits`;
 
+// Users API
+
 export const createUser = (user) =>
     axios.post(`${USERS_API}`, user)
         .then(response => response.data);
@@ -35,6 +37,8 @@ export const findUserByCredentials = (credentials) =>
     axios.post(`${LOGIN_API}`, credentials)
         .then(response => response.data);
 
+// Tuits API
+
 export const findAllTuits = () =>
     axios.get(TUITS_API)
         .then(response => response.data);
@@ -60,3 +64,30 @@ export const updateTuit = (tid, tuit) =>
 export const deleteTuit = (tid) =>
     axios.delete(`${TUITS_API}/${tid}`)
         .then(response => response.data);
+
+// Dislike API
+
+export const findAllTuitsDislikedByUser = (uid) =>
+    axios.get(`${USERS_API}/${uid}/dislikes`)
+        .then(response => response.data);
+
+export const findAllUsersThatDislikedTuit = (tid) =>
+    axios.get(`${TUITS_API}/${tid}/dislikes`)
+        .then(response => response.data);
+
+export const doesUserDislikeTuit = (uid, tid) =>
+    axios.get(`${USERS_API}/${uid}/dislikes/${tid}`)
+        .then(response => response.data);
+
+export const userTogglesDislike = (uid, tid) =>
+    axios.put(`${USERS_API}/${uid}/dislikes/${tid}`)
+        .then(response => response.data);
+
+export const userDislikesTuit = (uid, tid) =>
+    axios.post(`${USERS_API}/${uid}/dislike/${tid}`)
+        .then(response => response.data);
+
+export const userUndislikesTuit = (uid, tid) =>
+    axios.delete(`${USERS_API}/${uid}/dislike/${tid}`)
+        .then(response => response.data);
+
