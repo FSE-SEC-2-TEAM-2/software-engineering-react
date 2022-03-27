@@ -3,18 +3,39 @@ import {Tuits} from "../tuits";
 import * as service from "../../services/tuits-service";
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
+import * as authService from "../../services/auth-service";
 
 export const Home = () => {
     const location = useLocation();
-    const {uid} = useParams();
+    let hasParams = undefined
+    // let {uid} = useParams();
     const [tuits, setTuits] = useState([]);
     const [tuit, setTuit] = useState('');
-    const userId = uid;
-    const findTuits = () => {
-        if (uid) {
-            return service.findTuitByUser(uid)
+    const [uid, setUid] = useState(useParams());
+    // console.log(uid)
+
+    const findTuits = async () => {
+        if (hasParams === undefined) {
+            hasParams = !!uid.uid;
+        }
+
+        if (hasParams) {
+            // console.log("Get User Tuits alone")
+            return service.findTuitsByUser(uid.uid)
                 .then(tuits => setTuits(tuits))
         } else {
+            try {
+                const user = await authService.profile();
+                // console.log(user)
+                const suid = {
+                    uid: user._id
+                }
+                setUid(suid);
+                console.log("Used session successfully")
+                // console.log(uid)
+            } catch (e) {
+                console.log('Not Logged in!')
+            }
             return service.findAllTuits()
                 .then(tuits => setTuits(tuits))
         }
@@ -27,7 +48,7 @@ export const Home = () => {
         }
     }, []);
     const createTuit = () =>
-        service.createTuit(userId, {tuit})
+        service.createTuit(uid.uid, {tuit})
             .then(findTuits)
     const deleteTuit = (tid) =>
         service.deleteTuit(tid)
@@ -37,7 +58,7 @@ export const Home = () => {
             <div className="border border-bottom-0">
                 <h4 className="fw-bold p-2">Home Screen</h4>
                 {
-                    uid &&
+                    uid.uid &&
                     <div className="d-flex">
                         <div className="p-2">
                             <img className="ttr-width-50px rounded-circle"
