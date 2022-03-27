@@ -91,3 +91,28 @@ export const userUndislikesTuit = (uid, tid) =>
     axios.delete(`${USERS_API}/${uid}/dislike/${tid}`)
         .then(response => response.data);
 
+// Like API
+
+export const findAllTuitsLikedByUser = (uid) =>
+    axios.get(`${USERS_API}/${uid}/likes`)
+        .then(response => response.data);
+
+export const findAllUsersThatLikedTuit = (tid) =>
+    axios.get(`${TUITS_API}/${tid}/likes`)
+        .then(response => response.data);
+
+export const doesUserLikeTuit = (uid, tid) =>
+    axios.get(`${USERS_API}/${uid}/likes/${tid}`)
+        .then(response => response.data);
+
+export const userTogglesLike = (uid, tid) =>
+    axios.put(`${USERS_API}/${uid}/likes/${tid}`)
+        .then(response => response.data);
+
+export const userLikesTuit = (uid, tid) =>
+    axios.post(`${USERS_API}/${uid}/like/${tid}`)
+        .then(response => response.data);
+
+export const userUnlikesTuit = (uid, tid) =>
+    axios.delete(`${USERS_API}/${uid}/like/${tid}`)
+        .then(response => response.data);
