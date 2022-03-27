@@ -1,26 +1,23 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
 import * as authService from "../../services/auth-service";
 import * as likeService from "../../services/likes-service";
+import * as dislikeService from "../../services/dislikes-service";
 
-export const TuitStats = ({tuit, likeTuit = () => {}}) => {
+export const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}}) => {
     const [uid, setUid] = useState(null);
     const [liked, setLiked] = useState(false);
+    const [disliked, setDisliked] = useState(false);
 
     const checkIfLoggedIn = async () => {
         const user = await authService.profile();
-        // console.log(user)
         const suid = {
             uid: user._id
         }
         setUid(suid);
-        // console.log("Used session successfully")
-        // console.log(uid)
-        // console.log(user._id)
-        const result = await likeService.doesUserLikeTuit(user._id, tuit._id)
-        setLiked(result)
-        // console.log(result)
-        // console.log(liked)
+        const isLiked = await likeService.doesUserLikeTuit(user._id, tuit._id)
+        setLiked(isLiked)
+        const isDisliked = await dislikeService.doesUserDislikeTuit(user._id, tuit._id)
+        setDisliked(isDisliked)
     }
     useEffect(() => {
         let isMounted = true;
@@ -29,6 +26,55 @@ export const TuitStats = ({tuit, likeTuit = () => {}}) => {
             isMounted = false;
         }
     }, []);
+
+
+
+    const handleLikeDislike = (clickedOn, toggleLike, toggleDislike) => {
+        if (clickedOn === 'like') {
+            if (!liked && !disliked) {
+                toggleLike(tuit);
+                setLiked(!liked);
+            } else if (liked) {
+                toggleLike(tuit);
+                setLiked(!liked);
+            } else {
+                toggleDislike(tuit);
+                setDisliked(!disliked);
+                toggleLike(tuit);
+                setLiked(!liked);
+            }
+        } else if (clickedOn === 'dislike') {
+            if (!liked && !disliked) {
+                toggleDislike(tuit);
+                setDisliked(!disliked);
+            } else if (disliked) {
+                toggleDislike(tuit);
+                setDisliked(!disliked);
+            } else {
+                toggleLike(tuit);
+                setLiked(!liked);
+                toggleDislike(tuit);
+                setDisliked(!disliked);
+            }
+        }
+        // if (!liked && !disliked) {
+        //     console.log('Fresh')
+        //     callback(tuit);
+        // } else {
+        //     if (liked) {
+        //         console.log('Reset Like')
+        //         toggleLike(tuit);
+        //         setLiked(!liked);
+        //     }
+        //     if (disliked) {
+        //         console.log('Reset Dislike')
+        //         toggleDislike(tuit);
+        //         setDisliked(!disliked);
+        //     }
+        //     callback(tuit);
+        // }
+    }
+
     return (
         <div className="row mt-2">
             <div className="col">
@@ -41,8 +87,7 @@ export const TuitStats = ({tuit, likeTuit = () => {}}) => {
             </div>
             <div className="col">
           <span onClick={() => {
-              likeTuit(tuit);
-              setLiked(!liked);
+              handleLikeDislike("like", likeTuit, dislikeTuit)
           }}>
               {
                   liked &&
@@ -57,7 +102,19 @@ export const TuitStats = ({tuit, likeTuit = () => {}}) => {
           </span>
             </div>
             <div className="col">
-                <i className="fa-light fa-thumbs-down me-1"/>
+                <span onClick={() => {
+                    handleLikeDislike("dislike", likeTuit, dislikeTuit)
+                }}>
+                {
+                    disliked &&
+                    <i className="fa-solid fa-thumbs-down me-1"/>
+                }
+                {
+                    !disliked &&
+                    <i className="fa-light fa-thumbs-down me-1"/>
+                }
+                {tuit.stats && tuit.stats.dislikes}
+              </span>
             </div>
         </div>
     );
