@@ -1,6 +1,7 @@
-const Explore = () => {
-  return(
-    <h1>Explore</h1>
-  );
+import React from "react";
+
+export const Explore = () => {
+    return (
+        <h1>Explore Screen</h1>
+    );
 };
-export default Explore;

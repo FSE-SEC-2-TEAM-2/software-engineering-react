@@ -1,6 +1,7 @@
-const Notifications = () => {
-  return(
-    <h1>Notifications</h1>
-  );
+import React from "react";
+
+export const Notifications = () => {
+    return (
+        <h1>Notifications Screen</h1>
+    );
 };
-export default Notifications;

@@ -1,6 +1,7 @@
-const Messages = () => {
-  return(
-    <h1>Messages</h1>
-  );
+import React from "react";
+
+export const Messages = () => {
+    return (
+        <h1>Messages Screen</h1>
+    );
 };
-export default Messages;
