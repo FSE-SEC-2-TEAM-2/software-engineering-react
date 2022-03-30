@@ -9,6 +9,9 @@ on:
     branches: [ deployment ]
   pull_request:
     branches: [ deployment ]
+    
+env:
+  CI: false
 
 jobs:
   build:
