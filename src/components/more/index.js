@@ -1,6 +1,7 @@
-const More = () => {
-  return(
-    <h1>More</h1>
-  );
+import React from "react";
+
+export const More = () => {
+    return (
+        <h1>More Screen</h1>
+    );
 };
-export default More;

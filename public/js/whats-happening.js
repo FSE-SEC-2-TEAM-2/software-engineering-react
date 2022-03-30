@@ -13,18 +13,18 @@ function WhatsHappening() {
     ${
      whatsHappening.map(wh => {
        return(`
-         <div class="ttr-whats-happening-tuit d-flex mb-3">
-           <div class="flex-grow-1">
-            <h3 class="fs-6 fw-lighter">
+         <div key={wh._id} className="ttr-whats-happening-tuit d-flex mb-3">
+           <div className="flex-grow-1">
+            <h3 className="fs-6 fw-lighter">
              ${wh.topic} - ${wh['hours-ago']} hours ago</h3>
-            <div class="fw-bold mb-2 pe-1">
+            <div className="fw-bold mb-2 pe-1">
              ${wh.content}
             </div>
-            <h4 class="fs-6 fw-lighter">${wh.likes} likes</h4>
+            <h4 className="fs-6 fw-lighter">${wh.likes} likes</h4>
            </div>
            <div>
             <img src="../images/${wh['user-logo']}"
-                 class="ttr-rounded-15px ttr-user-logo"/>
+                 className="ttr-rounded-15px ttr-user-logo"/>
            </div>
           </div>
        `);
