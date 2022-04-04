@@ -24,7 +24,6 @@ export function Tuits({ tuits = [], refreshTuits }) {
 
 
     const bookmarkTuit = (tuit) => {
-        console.log(tuit)
         bookmarkService
             .userTogglesTuitBookmarks("session", tuit._id)
             .then(refreshTuits)

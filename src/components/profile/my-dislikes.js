@@ -7,7 +7,6 @@ export const MyDislikes = () => {
     const findMyDislikedTuits = () =>
         service.findAllTuitsDislikedByUser("session")
             .then((tuits) => {
-                console.log(tuits)
                 setTuits(tuits)
             });
 
