@@ -1,11 +1,11 @@
 import React from "react";
 import './tuits.css';
-import {Tuit} from "./tuit";
+import { Tuit } from "./tuit";
 import * as likesService from "../../services/likes-service";
 import * as dislikesService from "../../services/dislikes-service";
 import * as TuitsService from "../../services/tuits-service";
-
-export function Tuits({tuits = [], refreshTuits}) {
+import * as bookmarkService from "../../services/bookmarks-service";
+export function Tuits({ tuits = [], refreshTuits }) {
     const likeTuit = (tuit) =>
         likesService
             .userTogglesTuitLikes("session", tuit._id)
@@ -22,6 +22,16 @@ export function Tuits({tuits = [], refreshTuits}) {
         TuitsService.deleteTuit(tid)
             .then(refreshTuits);
 
+
+    const bookmarkTuit = (tuit) => {
+        console.log(tuit)
+        bookmarkService
+            .userTogglesTuitBookmarks("session", tuit._id)
+            .then(refreshTuits)
+            .catch(e => alert(e))
+    }
+
+
     return (
         <div>
             <ul className="ttr-tuits list-group">
@@ -29,10 +39,11 @@ export function Tuits({tuits = [], refreshTuits}) {
                     tuits.map && tuits.map(tuit => {
                         return (
                             <Tuit key={tuit._id}
-                                  deleteTuit={deleteTuit}
-                                  likeTuit={likeTuit}
-                                  dislikeTuit={dislikeTuit}
-                                  tuit={tuit}/>
+                                deleteTuit={deleteTuit}
+                                likeTuit={likeTuit}
+                                dislikeTuit={dislikeTuit}
+                                bookmarkTuit={bookmarkTuit}
+                                tuit={tuit} />
                         );
                     })
                 }

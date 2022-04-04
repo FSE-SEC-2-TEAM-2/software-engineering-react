@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import * as authService from "../../services/auth-service";
 import * as likeService from "../../services/likes-service";
 import * as dislikeService from "../../services/dislikes-service";
-
-export const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}}) => {
+import * as bookmarkService from "../../services/bookmarks-service";
+export const TuitStats = ({ tuit, likeTuit = () => { }, dislikeTuit = () => { }, bookmarkTuit = () => { } }) => {
     const [uid, setUid] = useState(null);
     const [liked, setLiked] = useState(false);
     const [disliked, setDisliked] = useState(false);
+    const [bookmark, setBookmark] = useState(false);
 
     const checkIfLoggedIn = async () => {
         const user = await authService.profile();
@@ -18,6 +19,9 @@ export const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}}) =
         setLiked(isLiked)
         const isDisliked = await dislikeService.doesUserDislikeTuit(user._id, tuit._id)
         setDisliked(isDisliked)
+        const isBookmarked = await bookmarkService.doesUserBookmarkTuit(user._id, tuit._id)
+        setBookmark(isBookmarked)
+
     }
     useEffect(() => {
         let isMounted = true;
@@ -78,43 +82,54 @@ export const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}}) =
     return (
         <div className="row mt-2">
             <div className="col">
-                <i className="far fa-message me-1"/>
+                <i className="far fa-message me-1" />
                 {tuit.stats && tuit.stats.replies}
             </div>
             <div className="col">
-                <i className="far fa-retweet me-1"/>
-                {tuit.stats && tuit.stats.retuits}
+                <span onClick={() => {
+                    bookmarkTuit(tuit);
+                    setBookmark(!bookmark);
+                }}>
+                    {
+                        bookmark &&
+                        <i class="fa-solid fa-book-bookmark"> </i>
+                    }
+                    {
+                        !bookmark &&
+                        <i class="fa-light fa-book-bookmark"> </i>
+                    }
+                    {tuit.stats && tuit.stats.bookmarks}
+                </span>
             </div>
             <div className="col">
-          <span onClick={() => {
-              handleLikeDislike("like", likeTuit, dislikeTuit)
-          }}>
-              {
-                  liked &&
-                  <i className="fa-solid fa-thumbs-up me-1"/>
-              }
-              {
-                  !liked &&
-                  <i className="fa-light fa-thumbs-up me-1"/>
-              }
-              {/*<i className="fas fa-heart me-1" />*/}
-              {tuit.stats && tuit.stats.likes}
-          </span>
+                <span onClick={() => {
+                    handleLikeDislike("like", likeTuit, dislikeTuit)
+                }}>
+                    {
+                        liked &&
+                        <i className="fa-solid fa-thumbs-up me-1" />
+                    }
+                    {
+                        !liked &&
+                        <i className="fa-light fa-thumbs-up me-1" />
+                    }
+                    {tuit.stats && tuit.stats.likes}
+                </span>
             </div>
             <div className="col">
                 <span onClick={() => {
                     handleLikeDislike("dislike", likeTuit, dislikeTuit)
                 }}>
-                {
-                    disliked &&
-                    <i className="fa-solid fa-thumbs-down me-1"/>
-                }
-                {
-                    !disliked &&
-                    <i className="fa-light fa-thumbs-down me-1"/>
-                }
-                {tuit.stats && tuit.stats.dislikes}
-              </span>
+                    {
+                        disliked &&
+                        <i className="fa-solid fa-thumbs-down me-1" />
+                    }
+                    {
+                        !disliked &&
+                        <i className="fa-light fa-thumbs-down me-1" />
+                    }
+                    {tuit.stats && tuit.stats.dislikes}
+                </span>
             </div>
         </div>
     );
