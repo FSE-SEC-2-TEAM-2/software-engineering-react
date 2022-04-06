@@ -3,7 +3,7 @@ import {TuitStats} from "./tuit-stats";
 import {TuitImage} from "./tuit-image";
 import {TuitVideo} from "./tuit-video";
 
-export const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
+export const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, loggedInUserId, followUser, unfollowUser}) => {
     return (
         <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
             <div className="pe-2">
@@ -13,6 +13,8 @@ export const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
                          className="ttr-tuit-avatar-logo rounded-circle" alt="Avatar Logo"/>
                     // <i className={`fa fa-user text-center ttr-tuit-avatar-logo rounded-circle`}/>
                 }
+                { (tuit.postedBy._id !== loggedInUserId) && tuit.postedBy && <button
+                    onClick={() => followUser(loggedInUserId, tuit.postedBy._id)}>Follow</button> }
             </div>
             <div className="w-100">
                 <i onClick={() => deleteTuit(tuit._id)} className="fas fa-remove fa-2x fa-pull-right"/>

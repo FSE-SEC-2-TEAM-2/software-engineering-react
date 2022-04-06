@@ -18,7 +18,6 @@ export const Home = () => {
         if (hasParams === undefined) {
             if (uid.uid) {
                 // console.log('hasParams');
-                // console.log(uid);
                 hasParams = true;
             } else {
                 // console.log('noParams');
@@ -33,7 +32,6 @@ export const Home = () => {
         // } else {
             try {
                 const user = await authService.profile();
-                // console.log(user)
                 const suid = {
                     uid: user._id
                 }
@@ -98,7 +96,7 @@ export const Home = () => {
                     </div>
                 }
             </div>
-            <Tuits tuits={tuits} refreshTuits={findTuits}/>
+            <Tuits tuits={tuits} refreshTuits={findTuits} loggedInUserId={uid.uid}/>
         </div>
     );
 };

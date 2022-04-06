@@ -4,8 +4,9 @@ import {Tuit} from "./tuit";
 import * as likesService from "../../services/likes-service";
 import * as dislikesService from "../../services/dislikes-service";
 import * as TuitsService from "../../services/tuits-service";
+import * as UserService from "../../services/users-service"
 
-export function Tuits({tuits = [], refreshTuits}) {
+export function Tuits({tuits = [], refreshTuits, loggedInUserId}) {
     const likeTuit = (tuit) =>
         likesService
             .userTogglesTuitLikes("session", tuit._id)
@@ -21,6 +22,12 @@ export function Tuits({tuits = [], refreshTuits}) {
     const deleteTuit = (tid) =>
         TuitsService.deleteTuit(tid)
             .then(refreshTuits);
+    
+    const followUser = (following_uid, followed_uid) =>
+        UserService.followUser(following_uid, followed_uid).then(refreshTuits)
+    
+    const unfollowUser = (following_uid, followed_uid) =>
+        UserService.unfollowUser(following_uid, followed_uid).then(refreshTuits)
 
     return (
         <div>
@@ -32,7 +39,10 @@ export function Tuits({tuits = [], refreshTuits}) {
                                   deleteTuit={deleteTuit}
                                   likeTuit={likeTuit}
                                   dislikeTuit={dislikeTuit}
-                                  tuit={tuit}/>
+                                  tuit={tuit}
+                                  loggedInUserId={loggedInUserId}
+                                  followUser={followUser}
+                                  unfollowUser={unfollowUser}/>
                         );
                     })
                 }

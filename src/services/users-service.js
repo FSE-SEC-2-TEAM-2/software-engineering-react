@@ -33,3 +33,12 @@ export const deleteUsersByUsername = (username) =>
 export const findUserByCredentials = (credentials) =>
     axios.post(`${LOGIN_API}`, credentials)
         .then(response => response.data);
+
+export const followUser = (following_uid, followed_uid) =>
+    axios.post(`${USERS_API}/${following_uid}/follows/${followed_uid}`)
+        .then(response => response.data)
+
+export const unfollowUser = (following_uid, followed_uid) =>
+    axios.delete(`${USERS_API}/${following_uid}/follows/${followed_uid}`)
+        .then(response => response.data)
+    
