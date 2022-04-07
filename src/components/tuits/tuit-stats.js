@@ -86,7 +86,7 @@ export const TuitStats = ({ tuit, likeTuit = () => { }, dislikeTuit = () => { },
                 {tuit.stats && tuit.stats.replies}
             </div>
             <div className="col">
-                <span onClick={() => {
+                <span className="ttr-bookmark-tuit-click" onClick={() => {
                     bookmarkTuit(tuit);
                     setBookmark(!bookmark);
                 }}>
@@ -98,7 +98,10 @@ export const TuitStats = ({ tuit, likeTuit = () => { }, dislikeTuit = () => { },
                         !bookmark &&
                         <i class="fa-light fa-book-bookmark"> </i>
                     }
-                    {tuit.stats && tuit.stats.bookmarks}
+
+                    {tuit.stats && <span className="ttr-stats-bookmarks">{tuit.stats.bookmarks}</span>}
+
+
                 </span>
             </div>
             <div className="col">
