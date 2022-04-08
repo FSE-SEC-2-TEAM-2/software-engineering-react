@@ -13,7 +13,7 @@ export const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, loggedInUserId, f
 
     useEffect(() => {
         getFollowData()
-      }, []);
+    });
     
     return (
         <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
