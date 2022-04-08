@@ -3,7 +3,7 @@ import {TuitStats} from "./tuit-stats";
 import {TuitImage} from "./tuit-image";
 import {TuitVideo} from "./tuit-video";
 
-export const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit,bookmarkTuit}) => {
+export const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit}) => {
     return (
         <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
             <div className="pe-2">
@@ -29,7 +29,7 @@ export const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit,bookmarkTuit}) => 
                     tuit.image &&
                     <TuitImage tuit={tuit}/>
                 }
-                <TuitStats tuit={tuit} likeTuit={likeTuit} dislikeTuit={dislikeTuit} bookmarkTuit={bookmarkTuit}/>
+                <TuitStats tuit={tuit} likeTuit={likeTuit} dislikeTuit={dislikeTuit}/>
             </div>
         </li>
     );
