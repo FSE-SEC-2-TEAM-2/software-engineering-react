@@ -28,6 +28,9 @@ export function Tuits({tuits = [], refreshTuits, loggedInUserId}) {
     
     const unfollowUser = (following_uid, followed_uid) =>
         UserService.unfollowUser(following_uid, followed_uid).then(refreshTuits)
+    
+    const isFollowing = (isFollowing_uid, isFollowed_uid) =>
+        UserService.isFollowing(isFollowing_uid, isFollowed_uid)
 
     return (
         <div>
@@ -42,7 +45,8 @@ export function Tuits({tuits = [], refreshTuits, loggedInUserId}) {
                                   tuit={tuit}
                                   loggedInUserId={loggedInUserId}
                                   followUser={followUser}
-                                  unfollowUser={unfollowUser}/>
+                                  unfollowUser={unfollowUser}
+                                  isFollowing={isFollowing}/>
                         );
                     })
                 }
