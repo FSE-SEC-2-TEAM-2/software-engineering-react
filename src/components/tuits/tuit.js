@@ -4,7 +4,7 @@ import {TuitImage} from "./tuit-image";
 import {TuitVideo} from "./tuit-video";
 import {useEffect, useState} from "react";
 
-export const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, loggedInUserId, followUser, unfollowUser, isFollowing}) => {      
+export const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, loggedInUserId, followUser, unfollowUser, isFollowing, bookmarkTuit}) => {
     const [isFollow, setIsFollow] = useState();
 
     const getFollowData = async() => {
@@ -14,7 +14,7 @@ export const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, loggedInUserId, f
     useEffect(() => {
         getFollowData()
     });
-    
+
     return (
         <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
             <div className="pe-2">
@@ -24,8 +24,6 @@ export const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, loggedInUserId, f
                          className="ttr-tuit-avatar-logo rounded-circle" alt="Avatar Logo"/>
                     // <i className={`fa fa-user text-center ttr-tuit-avatar-logo rounded-circle`}/>
                 }
-                {/* {console.log(getFollowData())} */}
-                {/* {console.log(isFollowing(loggedInUserId, tuit.postedBy._id))} */}
                 { (loggedInUserId === undefined) || (!isFollow && tuit.postedBy && (tuit.postedBy._id !== loggedInUserId)) && (<button
                     onClick={() => {
                         followUser(loggedInUserId, tuit.postedBy._id)
@@ -52,7 +50,7 @@ export const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, loggedInUserId, f
                     tuit.image &&
                     <TuitImage tuit={tuit}/>
                 }
-                <TuitStats tuit={tuit} likeTuit={likeTuit} dislikeTuit={dislikeTuit}/>
+                <TuitStats tuit={tuit} likeTuit={likeTuit} dislikeTuit={dislikeTuit} bookmarkTuit={bookmarkTuit}/>
             </div>
         </li>
     );
