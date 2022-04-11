@@ -45,6 +45,7 @@ export const unfollowUser = (following_uid, followed_uid) =>
 export const isFollowing = (isFollowing_uid, isFollowed_uid) =>
     axios.get(`${USERS_API}/${isFollowing_uid}/following/${isFollowed_uid}`)
         .then(response => response.data)
-    // axios.get("http://localhost:4000/users/624e052dab0e63091bf392af/following/624e0647ab0e63091bf392b5")
-    //     .then(response => response.data)
-    
+
+export const findAllUsersFollowedByUser = (uid) =>
+    axios.get(`${USERS_API}/${uid}/follows`)
+        .then(response => response.data)
