@@ -1,9 +1,5 @@
 import * as services from "./services";
 
-// const sampleTuit = {
-//     tuit: 'Test Tuit 2',
-// };
-
 const adam = {
     username: 'adam_adam',
     password: 'not0sum',
@@ -16,7 +12,6 @@ const bob = {
 };
 
 describe('test follows and unfollows', () => {
-    // let tid;
     let uidAdam;
     let uidBob;
 
@@ -26,8 +21,6 @@ describe('test follows and unfollows', () => {
         const newUser = await services.createUser(adam);
         const newUser2 = await services.createUser(bob);
 
-        // const newTuit = await services.createTuit(newUser._id, sampleTuit);
-        // tid = newTuit._id;
         uidAdam = newUser._id;
         uidBob = newUser2._id;
     });
@@ -40,29 +33,21 @@ describe('test follows and unfollows', () => {
         return Promise.all(promises);
     });
 
-    // afterEach(async () => {
-    //     await services.deleteTuit(tid);
-    //     const newTuit = await services.createTuit(uid, sampleTuit);
-    //     tid = newTuit._id;
-    // })
-
-    // test('can follow user with REST API', async () => {
-    //     await services.userLikesTuit(uid, tid);
-    //     const status = await services.doesUserLikeTuit(uid, tid);
-
-    //     expect(status).toBe(true)
-    // });
-
-    test('Can follow and unfollow users', async () => {
+    test('follow and unfollow work as expected on valid data', async () => {
+        console.log("NEW RUN STARTS!")
         console.log(await services.followUser(uidAdam, uidBob));
         let followersForBob = await services.findAllFollowersForUser(uidBob);
-        let usersAdamFollows = await services.findAllUsersFollowedByUser(uidAdam);
+        // let usersAdamFollows = await services.findAllUsersFollowedByUser(uidAdam);
         console.log(followersForBob);
         expect(followersForBob.length).toBeGreaterThan(0);
-        followersForBob = followersForBob.filter(following => {
-            return following.userFollowing._id === uidAdam
-        });
-        expect(followersForBob.length).toBeGreaterThan(0);
+        console.log(await services.unfollowUser(uidAdam, uidBob));
+        followersForBob = await services.findAllFollowersForUser(uidBob);
+        console.log(followersForBob);
+        expect(followersForBob.length).toBe(0);
+        // followersForBob = followersForBob.filter(following => {
+        //     return following.userFollowing._id === uidAdam
+        // });
+        // expect(followersForBob.length).toBeGreaterThan(0);
 
         // await services.unfollowUser(uidAdam, uidBob);
         // followersForBob = await services.findAllFollowersForUser(uidBob);
@@ -75,7 +60,7 @@ describe('test follows and unfollows', () => {
         // expect(followersForBob.length).toBeLessThan(1);
     });
 
-    test('isFollowing REST API call works as expected', async () => {
+    test('isFollowing REST API call works as expected on valid data', async () => {
         await services.followUser(uidAdam, uidBob);
         let status = await services.isFollowing(uidAdam, uidBob);
         console.log(status);
@@ -86,11 +71,23 @@ describe('test follows and unfollows', () => {
 
         expect(status).toBe(false)
     });
+    
+    test('Following invalid users returns error', async () => {
+        const followUserResponse = await services.followUser("helloworld", "hello");
+        console.log(`followUserResponse: ${JSON.stringify(followUserResponse)}`);
+        expect(followUserResponse.name.toLowerCase()).toContain("error");
+    });
 
-    // test('sanity test', async () => {
-    //     let status = await services.isFollowing('6251497c43b37e7e56445155', '6251497943b37e7e56445153');
-    //     console.log(status);
-    //     expect(status).toBe(true)
-    // });
+    test('Unfollowing invalid users returns error', async () => {
+        const followUserResponse = await services.unfollowUser("helloworld", "hello");
+        console.log(`followUserResponse: ${JSON.stringify(followUserResponse)}`);
+        expect(followUserResponse.name.toLowerCase()).toContain("error");
+    });
+
+    test('isFollowing on invalid users returns error', async () => {
+        let status = await services.isFollowing("helloWorld", "hello");
+        console.log(status);
+        expect(status.name.toLowerCase()).toContain("error");
+    });
+    
 });
-//http://localhost:4000/users/6251497c43b37e7e56445155/following/6251497943b37e7e56445153
