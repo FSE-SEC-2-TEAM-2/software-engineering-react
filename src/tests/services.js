@@ -1,10 +1,12 @@
 import axios from "axios";
 
 export const BASE_URL = process.env.REACT_APP_TEST;
+const LOCAL_BASE_URL = 'http://localhost:4000';
 console.log(`Using ${BASE_URL} for Testing!`);
 
 const LOGIN_API = `${BASE_URL}/login`;
 const USERS_API = `${BASE_URL}/users`;
+const LOCAL_USERS_API = `${LOCAL_BASE_URL}/users`;
 const TUITS_API = `${BASE_URL}/tuits`;
 
 // Users API
@@ -115,4 +117,20 @@ export const userLikesTuit = (uid, tid) =>
 
 export const userUnlikesTuit = (uid, tid) =>
     axios.delete(`${USERS_API}/${uid}/like/${tid}`)
+        .then(response => response.data);
+
+export const findAllNotifications = () =>
+    axios.get(`${LOCAL_BASE_URL}/notifications`)
+        .then(response => response.data);
+
+export const createNotification = (notification) =>
+    axios.post(`${LOCAL_BASE_URL}/notifications`, notification)
+        .then(response => response.data);
+
+export const findNotificationsForUser = (uid) =>
+    axios.get(`${LOCAL_BASE_URL}/notifications/${uid}`)
+        .then(response => response.data);
+
+export const deleteNotificationsById = async (nid) =>
+    axios.delete(`${LOCAL_BASE_URL}/notifications/${nid}`)
         .then(response => response.data);
