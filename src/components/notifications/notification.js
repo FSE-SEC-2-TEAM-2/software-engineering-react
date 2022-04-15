@@ -20,7 +20,7 @@ export const Notification = ({notification,deleteNotification} ) => {
                 <i  onClick={() => deleteNotification(notification._id)} className="fas fa-remove fa-2x fa-pull-right"/>
                 {
                     notification.verb === "followed" &&
-                    <h4>{notification.subject_uid.username } {notification.verb} you. </h4>
+                    <h4 className="ttr-notification-string">{notification.subject_uid.username } {notification.verb} you. </h4>
                 }
                 {
                     notification.verb === "tuited by" &&
