@@ -4,6 +4,7 @@ import {
     userTogglesTuitBookmarks
 } from "../services/bookmarks-service";
 import {createTuit, createUser, deleteTuit, deleteUsersByUsername} from "./services";
+import {findNotificationsForUser} from "../services/notification-service";
 
 describe('userTogglesTuitBookmarks', () => {
     // sample user to insert
@@ -56,6 +57,12 @@ describe('userTogglesTuitBookmarks', () => {
         // Check that user bookmark the tuit and return proper result.
         const checkIfBookmarkRemoved = await doesUserBookmarkTuit(uid, tid)
         expect(checkIfBookmarkRemoved).toEqual(false)
+
+
+        const notification = await findNotificationsForUser(uid)
+
+        console.log(notification)
+
     });
 });
 

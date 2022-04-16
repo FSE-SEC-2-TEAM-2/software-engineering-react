@@ -24,16 +24,20 @@ export const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, loggedInUserId, f
                          className="ttr-tuit-avatar-logo rounded-circle" alt="Avatar Logo"/>
                     // <i className={`fa fa-user text-center ttr-tuit-avatar-logo rounded-circle`}/>
                 }
-                { (loggedInUserId === undefined) || (!isFollow && tuit.postedBy && (tuit.postedBy._id !== loggedInUserId)) && (<button
-                    onClick={() => {
-                        followUser(loggedInUserId, tuit.postedBy._id)
-                        getFollowData()
-                        }}>Follow</button> )}
-                { loggedInUserId && isFollow && tuit.postedBy && (tuit.postedBy._id !== loggedInUserId) && <button
-                    onClick={() => {
-                        unfollowUser(loggedInUserId, tuit.postedBy._id)
-                        getFollowData()
-                        }}>Unfollow</button> }
+                <span className="ttr-tuit-general-btn">
+                    { (loggedInUserId === undefined) || (!isFollow && tuit.postedBy && (tuit.postedBy._id !== loggedInUserId)) && (<button
+                        className="ttr-tuit-follow-btn"
+                        onClick={() => {
+                            followUser(loggedInUserId, tuit.postedBy._id)
+                            getFollowData()
+                            }}>Follow</button> )}
+                    { loggedInUserId && isFollow && tuit.postedBy && (tuit.postedBy._id !== loggedInUserId) && <button
+                        className="ttr-tuit-unfollow-btn"
+                        onClick={() => {
+                            unfollowUser(loggedInUserId, tuit.postedBy._id)
+                            getFollowData()
+                            }}>Unfollow</button> }
+                </span>
             </div>
             <div className="w-100">
                 <i onClick={() => deleteTuit(tuit._id)} className="fas fa-remove fa-2x fa-pull-right"/>
