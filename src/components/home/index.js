@@ -1,9 +1,10 @@
 import React from "react";
 import {Tuits} from "../tuits";
-import * as service from "../../services/tuits-service";
+import * as tuitsService from "../../services/tuits-service";
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import * as authService from "../../services/auth-service";
+import * as usersService from "../../services/users-service";
 
 export const Home = () => {
     const location = useLocation();
@@ -14,36 +15,38 @@ export const Home = () => {
     const [uid, setUid] = useState(useParams());
     // console.log(uid)
 
+    const followedTuits = async (usersFollowing) => {
+        const tuits = []
+        for (let index = 0; index < usersFollowing.length; index++) {
+            const uid = usersFollowing[index].userFollowed._id
+            tuits.push(... await tuitsService.findTuitsByUser(uid))
+        }   
+        console.log(tuits)  
+        return tuits 
+      }
+
     const findTuits = async () => {
         if (hasParams === undefined) {
             if (uid.uid) {
-                // console.log('hasParams');
                 hasParams = true;
             } else {
-                // console.log('noParams');
                 hasParams = false;
             }
         }
 
-        // if (hasParams) {
-        //     // console.log("Get User Tuits alone")
-        //     return service.findTuitsByUser(uid.uid)
-        //         .then(tuits => setTuits(tuits))
-        // } else {
             try {
                 const user = await authService.profile();
                 const suid = {
                     uid: user._id
                 }
                 setUid(suid);
+                const usersFollowing = await usersService.findAllUsersFollowedByUser(suid.uid)
+                console.log(usersFollowing)
+                setTuits(await followedTuits(usersFollowing))
                 console.log("Used session successfully")
-                // console.log(uid)
             } catch (e) {
                 console.log('Not Logged in!')
             }
-            return service.findAllTuits()
-                .then(tuits => setTuits(tuits))
-        // }
     }
     useEffect(() => {
         let isMounted = true;
@@ -53,10 +56,10 @@ export const Home = () => {
         }
     }, []);
     const createTuit = () =>
-        service.createTuit(uid.uid, {tuit})
+        tuitsService.createTuit(uid.uid, {tuit})
             .then(findTuits)
     const deleteTuit = (tid) =>
-        service.deleteTuit(tid)
+        tuitsService.deleteTuit(tid)
             .then(findTuits)
     return (
         <div className="ttr-home">
