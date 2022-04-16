@@ -119,6 +119,22 @@ export const userUnlikesTuit = (uid, tid) =>
     axios.delete(`${USERS_API}/${uid}/like/${tid}`)
         .then(response => response.data);
 
+export const findAllNotifications = () =>
+    axios.get(`${LOCAL_BASE_URL}/notifications`)
+        .then(response => response.data);
+
+export const createNotification = (notification) =>
+    axios.post(`${LOCAL_BASE_URL}/notifications`, notification)
+        .then(response => response.data);
+
+export const findNotificationsForUser = (uid) =>
+    axios.get(`${LOCAL_BASE_URL}/notifications/${uid}`)
+        .then(response => response.data);
+
+export const deleteNotificationsById = async (nid) =>
+    axios.delete(`${LOCAL_BASE_URL}/notifications/${nid}`)
+        .then(response => response.data);
+
 export const followUser = (following_uid, followed_uid) =>
 axios.post(`${LOCAL_USERS_API}/${following_uid}/follows/${followed_uid}`)
     .then(response => response.data)
