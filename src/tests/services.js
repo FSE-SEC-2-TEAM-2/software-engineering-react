@@ -134,3 +134,24 @@ export const findNotificationsForUser = (uid) =>
 export const deleteNotificationsById = async (nid) =>
     axios.delete(`${LOCAL_BASE_URL}/notifications/${nid}`)
         .then(response => response.data);
+
+export const followUser = (following_uid, followed_uid) =>
+axios.post(`${LOCAL_USERS_API}/${following_uid}/follows/${followed_uid}`)
+    .then(response => response.data)
+
+export const unfollowUser = (following_uid, followed_uid) =>
+    axios.delete(`${LOCAL_USERS_API}/${following_uid}/follows/${followed_uid}`)
+        .then(response => response.data)
+
+export const isFollowing = (isFollowing_uid, isFollowed_uid) =>{
+    console.log(`${LOCAL_USERS_API}/${isFollowing_uid}/following/${isFollowed_uid}`);
+    return axios.get(`${LOCAL_USERS_API}/${isFollowing_uid}/following/${isFollowed_uid}`)
+        .then(response => response.data)}
+        
+export const findAllFollowersForUser = (followed_uid) =>
+    axios.get(`${LOCAL_USERS_API}/${followed_uid}/followers`)
+        .then(response => response.data)
+                
+export const findAllUsersFollowedByUser = (follower_uid) =>
+    axios.get(`${LOCAL_USERS_API}/${follower_uid}/follows`)
+        .then(response => response.data)
