@@ -92,11 +92,11 @@ export const TuitStats = ({ tuit, likeTuit = () => { }, dislikeTuit = () => { },
                 }}>
                     {
                         bookmark &&
-                        <i class="fa-solid fa-book-bookmark"> </i>
+                        <i className="fa-solid fa-book-bookmark"> </i>
                     }
                     {
                         !bookmark &&
-                        <i class="fa-light fa-book-bookmark"> </i>
+                        <i className="fa-light fa-book-bookmark"> </i>
                     }
 
                     {tuit.stats && <span className="ttr-stats-bookmarks">{tuit.stats.bookmarks}</span>}
