@@ -11,7 +11,7 @@ export const createUser = (user) =>
 
 export const findAllUsers = () => {
     return axios.get(`${USERS_API}`)
-        .then( response =>  response.data );
+        .then(response => response.data);
 }
 
 export const findUserById = (uid) =>
@@ -47,4 +47,3 @@ export const isFollowing = (isFollowing_uid, isFollowed_uid) =>
         .then(response => response.data)
     // axios.get("http://localhost:4000/users/624e052dab0e63091bf392af/following/624e0647ab0e63091bf392b5")
     //     .then(response => response.data)
-    

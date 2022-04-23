@@ -1,14 +1,14 @@
-import {Tuits} from "../components/tuits";
-import {screen, render} from "@testing-library/react";
+import { Tuits } from "../components/tuits";
+import { screen, render } from "@testing-library/react";
 import * as services from "./services"
 import axios from "axios";
-import {HashRouter} from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import * as service from "../services/tuits-service";
 
 const MOCKED_TUITS = [
-    {tuit: "alice's tuit", postedBy: {username: "Alice", email: "alice@wonderland.com"}, _id: "1234"},
-    {tuit: "bob's tuit", postedBy: {username: "Bob", email: "bob@builders.inc"}, _id: "1235"},
-    {tuit: "charlie's tuit", postedBy: {username: "Carlie", email: "charile@chocolate.com"}, _id: "1236"},
+    { tuit: "alice's tuit", postedBy: { username: "Alice", email: "alice@wonderland.com" }, _id: "1234" },
+    { tuit: "bob's tuit", postedBy: { username: "Bob", email: "bob@builders.inc" }, _id: "1235" },
+    { tuit: "charlie's tuit", postedBy: { username: "Carlie", email: "charile@chocolate.com" }, _id: "1236" },
 ];
 
 describe('render from static', () => {
@@ -19,7 +19,7 @@ describe('render from static', () => {
 
         render(
             <HashRouter>
-                <Tuits tuits={MOCKED_TUITS} deleteTuit={deleteTuit}/>
+                <Tuits tuits={MOCKED_TUITS} deleteTuit={deleteTuit} />
             </HashRouter>);
 
         const expectations = [/alice's tuit/i, /bob's tuit/i, /charlie's tuit/i, /Alice/i, /Bob/i, /Charlie/i];
@@ -91,7 +91,7 @@ describe('render from async', () => {
 
         render(
             <HashRouter>
-                <Tuits tuits={createdTuits} deleteTuit={deleteTuit}/>
+                <Tuits tuits={createdTuits} deleteTuit={deleteTuit} />
             </HashRouter>);
 
         tuits.forEach((tuit) => {
@@ -108,7 +108,7 @@ describe('render from mock', () => {
     test('tuit list renders mocked', async () => {
         const mock = jest.spyOn(axios, 'get');
         mock.mockImplementation(() =>
-            Promise.resolve({data: {tuits: MOCKED_TUITS}}));
+            Promise.resolve({ data: { tuits: MOCKED_TUITS } }));
 
         const response = await services.findAllTuits();
         const tuits = response.tuits;
@@ -120,7 +120,7 @@ describe('render from mock', () => {
 
         render(
             <HashRouter>
-                <Tuits tuits={tuits} deleteTuit={deleteTuit}/>
+                <Tuits tuits={tuits} deleteTuit={deleteTuit} />
             </HashRouter>);
 
         const expectations = [/alice's tuit/i, /bob's tuit/i, /charlie's tuit/i, /Alice/i, /Bob/i, /Charlie/i]
