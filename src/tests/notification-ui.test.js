@@ -101,8 +101,6 @@ test('notification deletion works correctly', () => {
     
     const deleteBtn = root.findByProps({ className: 'fas fa-remove fa-2x fa-pull-right' })
     let displayedElement = root.findByProps({ className: 'ttr-notification-string' });
-    // console.log(JSON.stringify(displayedElement.children[0]));
-    // let foundDisplayedText = screen.getByText(/adam_smith/i);
     let displayedElementText = displayedElement.children[0];
     expect(displayedElementText).toBe("adam_smith");
 
