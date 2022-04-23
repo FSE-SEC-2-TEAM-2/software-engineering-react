@@ -3,8 +3,8 @@ import {
     findAllTuitsBookmarkedByUser,
     userTogglesTuitBookmarks
 } from "../services/bookmarks-service";
-import {createTuit, createUser, deleteTuit, deleteUsersByUsername} from "./services";
-import {findNotificationsForUser} from "../services/notification-service";
+import { createTuit, createUser, deleteTuit, deleteUsersByUsername } from "./services";
+import { findNotificationsForUser } from "../services/notification-service";
 
 describe('userTogglesTuitBookmarks', () => {
     // sample user to insert
