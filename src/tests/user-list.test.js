@@ -1,19 +1,19 @@
-import {UserList} from "../components/profile/user-list";
-import {screen, render} from "@testing-library/react";
-import {HashRouter} from "react-router-dom";
+import { UserList } from "../components/profile/user-list";
+import { screen, render } from "@testing-library/react";
+import { HashRouter } from "react-router-dom";
 import * as services from "./services";
 import axios from "axios";
 
 const MOCKED_USERS = [
-    {username: 'ellen_ripley', password: 'lv426', email: 'repley@weyland.com', _id: "123"},
-    {username: 'sarah_conor', password: 'illbeback', email: 'sarah@bigjeff.com', _id: "234"},
+    { username: 'ellen_ripley', password: 'lv426', email: 'repley@weyland.com', _id: "123" },
+    { username: 'sarah_conor', password: 'illbeback', email: 'sarah@bigjeff.com', _id: "234" },
 ];
 
 describe('render from static', () => {
     test('user list renders static user array', () => {
         render(
             <HashRouter>
-                <UserList users={MOCKED_USERS}/>
+                <UserList users={MOCKED_USERS} />
             </HashRouter>);
         let linkElement = screen.getByText(/ellen_ripley/i);
         expect(linkElement).toBeInTheDocument();
@@ -43,7 +43,7 @@ describe('render from async', () => {
 
         render(
             <HashRouter>
-                <UserList users={users}/>
+                <UserList users={users} />
             </HashRouter>);
         const linkElement = screen.getByText(/adam_smith/i);
         expect(linkElement).toBeInTheDocument();
@@ -52,14 +52,14 @@ describe('render from async', () => {
 
 describe('render from mock', () => {
     const MOCKED_USERS = [
-        {username: 'ellen_ripley', password: 'lv426', email: 'repley@weyland.com', _id: "123"},
-        {username: 'sarah_conor', password: 'illbeback', email: 'sarah@bigjeff.com', _id: "234"},
+        { username: 'ellen_ripley', password: 'lv426', email: 'repley@weyland.com', _id: "123" },
+        { username: 'sarah_conor', password: 'illbeback', email: 'sarah@bigjeff.com', _id: "234" },
     ];
 
     test('user list renders mocked', async () => {
         const mock = jest.spyOn(axios, 'get');
         mock.mockImplementation(() =>
-             Promise.resolve({data: {users: MOCKED_USERS}}));
+            Promise.resolve({ data: { users: MOCKED_USERS } }));
 
         const response = await services.findAllUsers();
         const users = response.users;
@@ -67,7 +67,7 @@ describe('render from mock', () => {
 
         render(
             <HashRouter>
-                <UserList users={users}/>
+                <UserList users={users} />
             </HashRouter>);
 
         const user = screen.getByText(/ellen_ripley/i);

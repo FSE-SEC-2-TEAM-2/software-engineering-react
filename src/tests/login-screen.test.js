@@ -5,15 +5,15 @@ import {
     deleteUsersByUsername, findAllUsers,
     findUserById
 } from "./services";
-import {Login} from "../components/profile/login";
-import {act, fireEvent, render, screen, waitFor} from "@testing-library/react";
-import {HashRouter} from "react-router-dom";
-import {Tuiter} from "../components/tuiter";
+import { Login } from "../components/profile/login";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { HashRouter } from "react-router-dom";
+import { Tuiter } from "../components/tuiter";
 import React from "react";
 
 const MOCKED_USERS = [
-    {username: 'ellen_ripley', password: 'lv426', email: 'repley@weyland.com'},
-    {username: 'sarah_conor', password: 'illbeback', email: 'sarah@bigjeff.com'},
+    { username: 'ellen_ripley', password: 'lv426', email: 'repley@weyland.com' },
+    { username: 'sarah_conor', password: 'illbeback', email: 'sarah@bigjeff.com' },
 ]
 
 describe('Test mock works', () => {
@@ -25,7 +25,7 @@ describe('Test mock works', () => {
 
     test("mocked hello world axios works", async () => {
         mock.mockImplementation(() =>
-            Promise.resolve({data: {message: 'hello world'}}));
+            Promise.resolve({ data: { message: 'hello world' } }));
         const response = await axios.get();
         expect(response.data.message).toEqual('hello world')
     });
@@ -40,7 +40,7 @@ describe('Test mocking users works', () => {
 
     test("find all users mock works", async () => {
         mock.mockImplementation(() =>
-            Promise.resolve({data: {users: MOCKED_USERS}}));
+            Promise.resolve({ data: { users: MOCKED_USERS } }));
         const response = await findAllUsers();
 
         // expect(axios.get).toHaveBeenCalledWith(`${BASE_URL}/users`);
@@ -68,7 +68,7 @@ describe('createUser', () => {
                     email: 'ellenripley@aliens.com'
                 };
                 const users = [ripley];
-                const resp = {data: users};
+                const resp = { data: users };
                 resolve(resp);
             })
         })
@@ -79,7 +79,7 @@ describe('createUser', () => {
         act(() => {
             render(
                 <HashRouter>
-                    <Login/>
+                    <Login />
                 </HashRouter>
             );
         });

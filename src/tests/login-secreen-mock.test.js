@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
-import {findAllUsers, BASE_URL} from "./services";
-import {act, fireEvent, render, screen, waitFor} from "@testing-library/react";
-import {Tuiter} from "../components/tuiter";
+import { findAllUsers, BASE_URL } from "./services";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { Tuiter } from "../components/tuiter";
 
 jest.mock("axios");
 
@@ -10,10 +10,10 @@ jest.mock("axios");
 describe('www', () => {
     beforeEach(() => {
         axios.get.mockImplementation(() =>
-            Promise.resolve({data: {users: MOCKED_USERS}}));
+            Promise.resolve({ data: { users: MOCKED_USERS } }));
 
         act(() => {
-            render(<Tuiter/>)
+            render(<Tuiter />)
         });
     });
 
@@ -21,7 +21,7 @@ describe('www', () => {
     test("login renders users", async () => {
         // console.log(qwe);
         axios.get.mockImplementation(() =>
-            Promise.resolve({data: {users: MOCKED_USERS}}));
+            Promise.resolve({ data: { users: MOCKED_USERS } }));
 
         await act(async () => {
             // get all the links

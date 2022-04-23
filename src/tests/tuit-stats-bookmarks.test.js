@@ -1,5 +1,5 @@
 import { act, create } from 'react-test-renderer';
-import {TuitStats} from "../components/tuits/tuit-stats";
+import { TuitStats } from "../components/tuits/tuit-stats";
 
 test('stats render correctly for dislike', () => {
     let stats = {
@@ -34,14 +34,14 @@ test('stats render correctly for dislike', () => {
     const root = tuitStats.root;
 
     const bookmarkCounter = root.findByProps({ className: 'ttr-stats-bookmarks' })
-    const bookmarkCounterButton = root.findByProps({className: 'ttr-bookmark-tuit-click'})
+    const bookmarkCounterButton = root.findByProps({ className: 'ttr-bookmark-tuit-click' })
 
     let bookmarks = bookmarkCounter.children[0];
     expect(bookmarks).toBe('345');
 
     //Disliking a tuit and seeing that counter goes down
     act(() => { bookmarkCounterButton.props.onClick() })
-    bookmarks =  bookmarkCounter.children[0];
+    bookmarks = bookmarkCounter.children[0];
     expect(bookmarks).toBe('344');
 
 });
